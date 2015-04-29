@@ -1,0 +1,109 @@
+{var $menu = [' ' => 'Úvod', 'rules' => 'Pravidla', 'examples' => 'Ukázky', 'demo' => 'Demo', 'download' => 'Ke stažení', 'comics' => 'Komiks', 'articles' => 'Články', 'book' => 'Diskuze']}
+
+{var $mainTitle = ($route != '[index.php]') ? $menu[$route] : $menu[' ']}
+
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <title>{$mainTitle} | Ulrik - Urob Libovolného Reka Internetovým Klikáním</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{$baseUrl}/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="ULRIK - Urob Libovolného Reka Internetovým Klikáním">
+    <meta name="author" content="Richard Faila">
+    <link rel="image_src" href="{$baseUrl}/img/ulrik_logo.jpg"/>
+    <link href="{$baseUrl}/css/bootstrap.css" rel="stylesheet">
+    <link href="{$baseUrl}/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{$baseUrl}/css/docs.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+      h2 { padding-top: 40px; margin-top: 0px; }
+    </style>
+    <link href="{$baseUrl}/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="{$baseUrl}/js/jquery.min.js"></script>
+    <script type="text/javascript">
+     $(function(){
+       $('.toc').each(function() {
+            $('#obsah').append('<li><a href="#'+this.id+'">'+this.textContent+'</a></li>');
+        }); 
+       $('.bs-docs-sidenav').affix({
+        offset: {
+          top: function () { return $(window).width() <= 980 ? 290 : 210 }, 
+          bottom: 270
+        }
+      })
+     });
+    </script>
+    
+    {block #head}{/block}
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="{$baseUrl}">ULRIK</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav" n:inner-foreach="$menu as $link => $title">
+              <li n:class="$mainTitle == $title ? active"><a href="{$baseUrl}/{$link|trim}">{$title|firstUpper}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    {include #header, mainTitle => $mainTitle}
+  </div>
+</header>
+
+
+  <div class="container">
+
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row">
+      <div class="span3 bs-docs-sidebar">
+        <ul id="obsah" class="nav nav-list bs-docs-sidenav">
+        </ul>
+      </div>
+      <div class="span9">
+        {include #content}
+      </div>
+    </div>
+      
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>Design vytvořen pomocí <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a>, serverová část používá <a href="http://nette.org">Nette</a>, <a href="http://doc.nette.org/cs/micro-framework">Nette micro framework</a> a <a href="http://texy.info">Texy!</a></p>
+        <p>Jesli narazíte na nějaký problém, můžete se mi ozvat na <a href="mailto:faila@atlas.cz">faila@atlas.cz</a></p>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <script text/javascript" src="{$baseUrl}/js/bootstrap-scrollspy.js"></script>
+    <script text/javascript" src="{$baseUrl}/js/bootstrap-affix.js"></script>
+    <script text/javascript" src="{$baseUrl}/js/bootstrap-collapse.js"></script>
+</body></html>

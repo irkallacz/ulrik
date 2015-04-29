@@ -1,0 +1,22 @@
+#vizual h2 { margin: 0px;}
+#vizual .elem {display: inline; position: relative; border: 1px black solid; text-align: center; 
+line-height: 25px; vertical-align: middle; font-family: Arial,sans-serif; border-radius: 15px; padding: 1px 10px;}
+#vizual .elem input {margin-right: 5px;}
+#vizual .path, .path .flow {background-color: rgb(255,224,16);}
+#vizual .zbroj, .zbroj .flow {background-color: rgb(204,153,51);}
+#vizual .zbran, .zbran .flow {background-color: rgb(161,161,161);}
+#vizual .skill, .skill .flow {background-color: rgb(127,176,16);}
+#vizual .spell, .spell .flow {background-color: rgb(32,96,255);}
+#vizual .vybava, .vybava .flow {background-color: rgb(240,255,160);}
+
+#vizual .flow {display: none; width: 250px; text-align: left; font-weight: normal; z-index: 2; color: black; 
+border: 1px black solid; padding: 5px 8px; line-height: 16px; border-radius: 15px;}
+#vizual .flow .top {text-align: right;}
+
+#vizual .elem:hover .flow {display: block; position: absolute; left: 10px; top: 22px;}
+
+#vizual ul {margin-top: 0px;}
+#vizual li {line-height: 25px; margin: 0px; padding: 0px 12px; border-left: 1px solid gray;
+background-repeat: no-repeat; background-position: -1px 0px; list-style-type: none;
+background-image: url('data:image/gif;base64,R0lGODlhCAAKAIABAIiIiP///yH5BAEKAAEALAAAAAAIAAoAAAIPRI5hecueIJKNVUsV2BwUADs=');}
+#vizual li:last-child {border-left: none; background-position: 0px 0px;} 

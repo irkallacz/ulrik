@@ -1,0 +1,39 @@
+{url demo}
+{layout "@layout.latte"}
+
+{block #header}
+<h1>{$mainTitle}</h1>
+<p class="lead">Není nad to, když to funguje!</p>
+{/block}
+
+{block #content}
+{block|texy}
+###### Živá ukázka .[toc]
+Toto je příklad použití systému na tvorbu pravidel ULRIK, tak jak byl vytvořen na LARPovou bitvu Warhammer - The Other Sides IV. 
+
+Jedná se o nejkomplexnější příklad, který je velmi podobný tomu, na čem běžela naše bitva. Celá aplikace je napsaná v php pomocí Nette frameworku (www.nette.org). 
+
+Celý příklad si můžete stáhnout na "stránce ke stažení":{$baseUrl}/download#warhammer. V archívu najdete postup, jak celou aplikaci zprovoznit.    
+
+Živá ukázka běží na adrese http://warhammer.irkalla.cz .[lead]
+
+**Login:** admin@warhammer.cz
+  **Heslo:** Admin
+
+Jako admin, máte přístup skoro ke všemu zajímavému.
+
+###### Přístupové údaje .[toc]
+
+V základním nastavení má k jednotlivým postavám přístup pouze admin a velitel každého národa. Jako přihlašovací údaje se používá email, který je v demu vždy ve formátu prezdivka@warhammer.cz (malá písmena, bez diakritiky) a heslo, které je stejné jako přezdívka.  
+{/block}
+
+<h3>Seznam postav</h3>
+
+<table class="table">
+<tr><th>Postava</th><th>Přezdívka</th><th>E-mail</th><th>Heslo</th></tr>
+<tr><td>Chaos champion</td><td>Michael</td><td>michael@warhammer.cz</td><td>Michael</td></tr><tr class="odd"><td>Prince</td><td>Resli</td><td>resli@warhammer.cz</td><td>Resli</td></tr><tr><td>Noble</td><td>David</td><td>david@warhammer.cz</td><td>David</td></tr><tr class="odd"><td>Thane</td><td>Aridion</td><td>aridion@warhammer.cz</td><td>Aridion</td></tr><tr><td>Chieftain</td><td>Loner</td><td>loner@warhammer.cz</td><td>Loner</td></tr><tr class="odd"><td>Sigmar priest</td><td>Blizzy</td><td>blizzy@warhammer.cz</td><td>Blizzy</td></tr><tr><td>Knight</td><td>Arnold</td><td>arnold@warhammer.cz</td><td>Arnold</td></tr><tr class="odd"><td>Master</td><td>Tomen</td><td>tomen@warhammer.cz</td><td>Tomen</td></tr><tr><td>Big boss</td><td>Palda</td><td>palda@warhammer.cz</td><td>Palda</td></tr><tr class="odd"><td>Vampire</td><td>Karen</td><td>karen@warhammer.cz</td><td>Karen</td></tr></table>
+
+<p>Celý seznam všech fiktivních hráčů v naší demo ukázce si můžete stáhnout na <a href="http://localhost/ulrik/download#users">stránce ke stažení</a>.
+</p>
+
+{/block}

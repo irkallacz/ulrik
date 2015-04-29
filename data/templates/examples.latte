@@ -1,0 +1,171 @@
+{url examples}
+{layout "@layout.latte"}
+
+{block #header}
+<h1>{$mainTitle}</h1>
+<p class="lead">Ukaž co umíš!</p>
+{/block}
+
+{block #content}
+{block|texy}
+###### Příklady použití .[toc]
+
+Na této stránce je možno najít příklady použití systému na tvorbu pravidel ULRIK. Jedná se o jednoduché ukázky, které mají sloužit jako příklad a na kterém je možno postavit vlastní systém. 
+
+Všechny příklady včetně komentářů je možno si stáhnout v jednom archivu na "stránce ke stažení":{$baseUrl}/download#ulrik.
+
+Příklad se skládá z hlavního souboru `rulesModel.class.php`, který obsahuje hlavní model, který se stará o veškerou práci s pravidly a dále potom z několika souborů `test_*.php`, které slouží jako příklady a ukazují jednotlivá použití systému.
+
+Příklady a model jsou bohatě komentované, takže by neměl problém se v kódu vyznat. Pro používání není třeba žádných velkých znalostí PHP, ale pro úpravy je dobré aby jste znali OOP a také XML a XSL.         
+
+Ukázková pravidla postavy se nacházejí ve složce `units` a jsou také komentované, takže byste neměli mít problém jim rozumět. V této složce také najdete soubory `*.xsl`, která se starají o transformace XML souborů na html (pravidla, wargear atd...) a jsou využívány pro jednotlivé příklady.  
+
+Ve složkách `img` a `css` můžete najít kaskádové styly a obrázky, které jsou použity v jednotlivých příkladech. 
+
+Pokud byste chtěli systém vykoušet na komplexnějších pravidlech, která byli použity na naší bitvě, můžete si tyto pravidla jednotných postav stáhnout na "stránce ke stažení":{$baseUrl}/download#units. Stačí je rozbalit a nakopírovat do složky `units`. 
+
+V pravidlech můžete narazit na výrazy, které se mohou vztahovat k obecným pravidlům naší bitvy. Tyto pravidla si můžete stáhnout na "stránce ke stažení":{$baseUrl}/download#rules.
+
+###### XML příklad .[toc]
+                    
+/---code jush-php
+<?php echo "<?php\n"?>
+//načteme model a vytvoříme model
+require 'rulesModel.class.php';
+//modelu je potřeba předat složku ve které se nachází soubory postav
+$model = new RulesModel(__DIR__.'/units');
+
+//vytvoříme seznam položek z wargearu, tu můžeme načíst třeba z databáze nebo odjinud
+//prohlédněte si soubor noble_wargear.xml pro více možností
+$set = array('Alter kindred','Regenerace');
+
+//z modelu si vytáhleme pravidla postavy podle jejího jména a předáme seznam položek z wargearu
+//a necháme si z modelu vytvořit novou XML strukturu s vybranými položkami z wargearu   
+$doc = $model->getXMLRules('noble',$set);
+
+//můžeme zkusit vypsat si popis postavy
+print '<p>Popis postavy: '.$doc->getElementsByTagName('popis')->item(0)->textContent.'</p>';
+
+//nebo si spočítat počty životů
+print 'Životy: ';
+$i = 0;
+foreach($doc->getElementsByTagName('lives') as $live) $i = $i + intval($live->nodeValue);
+print $i;
+
+//pokud nechte pracovat se třídou DOM, můžete si objekt převést na instanci SimpleXML
+$xml = simplexml_import_dom($doc);
+
+//výpis všech zbraní pomocí SimpleXML
+print '<h4>Zbraně:</h4><dl>';
+foreach ($xml->zbrane->zbran as $zbran){
+  print '<dt>'.$zbran->name.'</dt>';
+  print '<dd>'.$zbran->desc->asXML().'</dd>'; 
+}
+print '</dl>';
+
+//se souborem můžeme udělat i jiné věci, vytvořit z něj html stránku, pdf, nebo ho jen vypsat jako XML
+/*header('Content-type: text/xml');
+print $doc->saveXML();
+*/
+?>
+\---
+
+Tento příklad si můžete vyzkoušet "naživo":{$baseUrl}/test/test_xml_rules.php.
+
+###### Příklad s html stránkou .[toc]
+                    
+/---code jush-php
+<?php echo "<?php\n"?>
+//načteme model a vytvoříme model
+require 'rulesModel.class.php';
+//modelu je potřeba předat složku ve které se nachází soubory jednotek
+$model = new RulesModel(__DIR__.'/units');
+
+//vytvoříme seznam položek z wargearu, tu můžeme načíst třeba z databáze nebo odjinud
+//prohlédněte si soubor noble_wargear.xml pro více možností
+$set = array('Alter kindred','Regenerace');
+
+//z modelu si vytáhleme pravidla postavy podle jejího jména a předáme seznam položek z wargearu
+//a necháme si z modelu vytvořit novou XML strukturu s vybranými položkami z wargearu   
+$xml = $model->getXMLRules('noble',$set);
+
+//se souborem můžeme udělat libovolné věci, vytvořit z něj html stránku, pdf, nebo ho jen vypsat
+/*
+header('Content-type: text/xml');
+print $xml->saveXML();
+exit;
+*/
+
+//my necháme si z modelu vytvořit html stránku podle units_html.xsl
+$html = $model->XSLTransform(__DIR__.'/units/unit_html.xsl',$xml);
+
+//alternativně můžeme předchozí dva kroky sloučit do jednoho pomocí $html = $model->getHTMLRules('noble',$set);
+
+//vypíšeme html stránku
+print $html;
+?>
+\---
+
+Tento příklad si můžete vyzkoušet "naživo":{$baseUrl}/test/test_html_rules.php.
+
+###### Předání seznamu položek .[toc]
+                    
+/---code jush-php
+<?php echo "<?php\n"?>
+//načteme model a vytvoříme model
+require 'rulesModel.class.php';
+//modelu je potřeba předat složku ve které se nachází soubory jednotek
+$model = new RulesModel(__DIR__.'/units');
+
+//načteme seznam položek z wargearu z parametru předanému skripu
+$set = array_key_exists('set', $_GET) ? $_GET['set'] : $set = array(); 
+
+//z modelu si vytáhleme pravidla postavy podle jejího jména a předáme seznam položek z wargearu
+//a necháme si z modelu vytvořit novou XML strukturu s vybranými položkami z wargearu   
+//my necháme si z modelu vytvořit html stránku podle units_html.xsl
+$html = $model->getHTMLRules('noble',$set);
+
+//vypíšeme html stránku
+print $html;
+?>
+\---
+
+Tento příklad si můžete vyzkoušet "naživo":{$baseUrl}/test/test_html_rules_wargear.php?set[]=Alter+kindred.
+
+###### Práce s wargearem .[toc]
+                    
+/---code jush-php
+<?php echo "<?php\n"?>
+//načteme model a vytvoříme model
+require 'rulesModel.class.php';
+//modelu je potřeba předat složku ve které se nachází soubory postav
+$model = new RulesModel(__DIR__.'/units');
+
+//z modelu si vytáhleme všechyn položky v pravidlech wargearu
+//a necháme si z ní vytvořit novou XML strukturu    
+$xml = $model->getXMLFile('noble',true);
+
+//necháme si pomocí modelu z XML struktury wargearu vytvořit html stránku podle wargear_prehled.xsl
+$html = $model->XSLTransform(__DIR__.'/units/wargear_vizual.xsl',$xml);
+//alternativně můžeme použít i jiné šablony například
+//$html = $model->XSLTransform(__DIR__.'/units/wargear_prehled.xsl',$xml);
+
+//vypíšeme html stránku
+print $html;
+?>
+\---
+
+Tento příklad si můžete vyzkoušet "naživo":{$baseUrl}/test/test_html_wargear.php.
+
+Pokud byste chtěli tento projekt využít na nějaké své akci, máte k tomu můj souhlas, pokud nebudete nehorázně kopírovat naší práci a vydávat jí za svoji vlastní. Proto bych doporučil změnit vizuální podobu stránek, pravidel, udělat si vlastí logo atd... Zároveň by bylo fér se zmínit se na nových webovkách o tom, čí práci využíváte.  
+
+Pokud Vám následují ukázka nějak pomohla a budete je chtít použít na nějaké své akci, dejte nám prosím vědět na adresu faila@atlas.cz. S případnými dotazy se obracejte také na tuto adresu, pokud bude dotaz formulován inteligentně, rád pomůžu.    
+
+{/block}                      
+<script type="text/javascript" src="{$baseUrl}/js/jush.js"></script>
+<script type="text/javascript">
+  jush.style('./css/jush.css');
+  jush.highlight_tag('pre');
+</script>
+
+{/block}

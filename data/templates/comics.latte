@@ -1,0 +1,24 @@
+{url comics}
+{layout "@layout.latte"}
+
+{block #header}
+<h1>{$mainTitle}</h1>
+<p class="lead">Aneb když se Ulrik snaží o humor</p>
+{/block}
+
+{block #content}
+{var nazvy = ['Začátek', 'Vizonář', 'Ranní porada', 'Ztráta pozornosti', 'Moderní umění', 'Odměna za práci', 'Týmová psychologie', 'Chyba v Matrixu', 'Lovci mozků', 'Pragocentrismus']}          
+
+{block|texy}
+###### Komiks
+
+Když jsme vytvářeli bitvu, Ulrika a tak všelijak podobně, byla okolo toho i dost sranda. Občas se vyskytla taková situace, že o ní člověk prostě musel dá světu vědět. A právě tehdy se zrodil náš komiks.
+
+Následující scénky jsou utržky rozhovorů mezi mnou (ten u počítače) a mým bratrem. Většina se opravdu takto odehrála :D.
+{foreach $nazvy as $nazev}
+###### {$nazev} .[toc]
+[* {$basePath}/img/comic_{$iterator->counter}.jpg *]
+{/foreach}
+{/block}
+
+{/block}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<wargear>
+<!-- Soubor wargearu má pár zvláštností. Předně to je tag <points>, který určuje 
+cenu dané schopnosti, předmětu kouzla atd...  Každá položka musí tento tag mít, 
+ale smí mít hodnotu 0. -->
+
+<!-- Dalším tagem je <cond>, který musí obsahovat jméno schopnosti, kouzla atd... 
+jehož vlastnictvím je podmíněné pořízení této položky. Tag není povinný, 
+ale pokud se vyskytuje, nesmí být prázdný.  -->
+
+<jmeno>Noble</jmeno>
+
+<!-- Povolání jsou jakési základní směry postavy. Samy o sobě můžou a nemusí mít žádný efekt. 
+Slouží především pro základní rozdělení stromu, ale můžou být schopnosti 
+a kouzla přístupná všem směrům.  Hráč si může vybrat i více povolání, pokud na to má body -->
+
+<povolani>
+  <path>
+    <name>Alter kindred</name>
+    <points>50</points>
+    <lives>1</lives> <!-- kterákoliv položka může modifikovat vlasnosti postavy jako jsou životy atd... Pokud bude tato položka 
+    vybrána, automaticky se změna vlastnosti započítá -->
+    <!-- Jako v každém tagu <desc> i ve wargearu funguje v <desc> formátování textu -->
+    <desc>Starší elfové prokazují nezvyklou odolnost a bojové zkušenosti <b>(+1 život)</b>.</desc>
+    <img src="wood_elves/noble_2.jpg" />
+    <!-- položka může klidně přidávat i obrázek-->
+  </path> 
+
+  <path>
+    <name>Glamourewave kindred</name>
+    <points>80</points>
+    <bv>1</bv>
+    <desc>Glamourewave kindred svůj život zasvětili kouzlům.</desc>
+  </path> 
+  
+  <path>
+    <name>Waywatcher kindred</name>
+    <points>100</points>
+    <desc>Waywatcher kindred jsou zběhlí v ukrývání a střelbě.</desc>
+  </path> 
+</povolani>
+
+<zbroje>
+  <zbroj>
+    <name>Tvrzená kožená zbroj</name>
+    <!-- Pokud odkazuji na nějakou položku, musí být její název uveden přesně!-->
+    <points>30</points><cond>Alter kindred</cond> 
+    <desc>Kožená zbroj vyrobená z tlusté kůže Yaků dodává nositel lepší ochranu <b>(+1 životy)</b>.
+    </desc>
+    <lives>1</lives>
+  </zbroj> 
+</zbroje>              
+
+<vybaveni>
+
+ <vybava>
+    <name>Plášť z listů</name>
+    <points>100</points><cond>Skrytí ve stínech</cond>
+<desc>Schopnost <i>Skrytí ve stínu</i> se díky tomuto artefaktu může používat až 8x za Fázi.</desc>
+  </vybava> 
+
+</vybaveni>
+
+<zbrane>
+  <zbran>
+    <name>Kopí</name>
+    <points>50</points>
+    <cond>Alter kindred</cond>
+    <desc>(150-300 cm)</desc>
+  </zbran>                  
+  
+  <zbran>
+    <name>Luk</name>
+    <points>10</points>
+    <cond>Waywatcher kindred</cond>
+    <desc>Maximální nátah 1000 mega tun, šípy dobře měkčené</desc>
+  </zbran>     
+  
+  <zbran>
+    <name>Hůl magie</name>
+    <points>70</points>
+    <cond>Glamourewave kindred</cond>  
+    <desc>Tato mocná hůl je prý součástí samotného Dubu věků. Skrze ní může Noble čerpat  
+    magické proudy lesa, ať již je kdekoliv. Ve hře pak může nahradit jedno <i>Spojení</i> 
+    s lesem tak, že se hráč místo stromu dotýká své hole. Spojení vytvořená tímto předmětem 
+    lze využít pro kouzlení i mimo les</desc>
+  </zbran> 
+</zbrane>                                   
+
+<schopnosti>    
+  <skill>
+    <name>Skrytí ve stínech</name><attr>4x za Fázi</attr>
+    <points>20</points><cond>Waywatcher kindred</cond>
+    <desc>Noble se dokáže schovat v lesních stínech a splynout s nimi. Stačí se chytit 
+    nejbližšího stromu a pronést nahlas se zavřenými oči: <i>"Schovej mě, ukryj mě, ať se jim z očí 
+    ztratím"</i>. Poté je na něj uplatněn efekt základní neviditelnost. Pokud se dostane z území lesa, 
+    efekt mizí.</desc>
+  </skill> 
+  
+  <skill>
+    <name>Regenerace</name><attr>4x za Fázi</attr>
+    <points>30</points> <!-- Tahle schopnost nemá podmínku, koupit si jí můžete už od začátku -->
+    <desc>Když se Noble chytí kmene stromu, zavře oči a plynule a nahlas pronese slova: <i>"Já 
+    zranění již svá nechci a novou sílu načerpám"</i> (musí to říct aspoň 3 krát), může si poté  
+    přičíst 4 životy</desc>
+    <lives>1</lives>
+  </skill>
+  
+  <skill>
+    <name>Požehnání lesa</name><attr>2x za Fázi</attr>
+    <points>30</points><cond>Regenerace</cond>
+    <desc>Součástí učení šlechty lesních elfů je umění naslouchat a mluvit s Lesem. V případě 
+    nebezpečí může Noble vyslat jakousi modlitbu k lesu a ten pokud ho vyslyší, poskytne 
+    mu část své síly skrze duše lesa, které do něj vstoupí. Hráč musí pokleknout na zem, 
+    dotýkat se země a začít se modlit. Volba modlitby je něm. Po jejím skončení si může 
+    přidat 3 stínové životy. Může být provedeno pouze v lese.</desc>
+  </skill>  
+</schopnosti>
+
+<kouzla>                                                      
+  <spell>
+    <name>Ledová dýka</name><cost>1 spojeni</cost><attr>2x za Souboj</attr>
+    <points>50</points><cond>Glamourewave kindred</cond>
+    <form>Aesta alach ses!</form>
+    <desc>Z ruky Nobla vytryskne nehmotný blesk, který dokáže připravit nepřátele o jejich 
+    sílu. Vybraná nepřátelská jednotka obdrží efekt paralýza na 30 vteřin.</desc> 
+  </spell>
+</kouzla> 
+
+</wargear>

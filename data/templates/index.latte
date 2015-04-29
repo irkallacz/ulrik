@@ -1,0 +1,58 @@
+{url [index.php]}
+{layout "@layout.latte"}
+
+{block #header}
+<h1><span class="hide">ULRIK</span><img src="{$basePath}/img/ulrik_logo.png"></h1>
+<p class="lead">Urob Libovolného Reka Internetovým Klikáním!</p>
+{/block}
+
+{block #content}
+{block|texy}
+###### ULRIK
+To je dokumentace projektu **ULRIK**, který si vzal za úkol vytvořit systém pravidel, který umožní hráčem LARPu vytvořit si svoji postavu podle svého.
+             
+###### Jak to všechno začalo .[toc]
+              
+Tento systém jsme vytvořili pro naši LARPovou bitvu **Warhammer - The Other Sides IV**, kdy jsme čelili výzvě, jak uchopit problém s pravidly pro různé postavy. Na bitvě jsme měli 100 hráčů z nichž si každý mohl vybrat z jednu z 30 unikátních postav. 
+             
+Aby se po bojišti nepotulovala hromada postav se stejný statistikami, schopnostmi a výbavou, chtěli jsme dát každému možnost, aby si upravil schopnosti, kouzla a vybavení postav podle sebe. Kdybychom to z každým hráčem měli dělat ručně, asi bychom se z toho brzo zbláznili. Tak jsme se rozhodli, udělat to tak, aby do celého procesu nemusel organizátor co nejméně zasahovat a vše si pokud možno dělali hráči sami, přímo na stránkách akce.  
+             
+Každý z moderní generace je zvyklý na různé RPG nebo MMORPG hry, kdy hráči si "naklikají" postavu podle svého. Někdy i samotné zkoumání a zkoušení možností je celkem velká zábava a přesně tím jsme se inspirovali my. Chtěli jsme dát hráčům možnost jednoduchým způsobem si vytvořit postavu přesně podle svého gusta a chtěli jsme, aby mohli experimentovat a bavilo je to.
+
+Hráči prostě dostali nějaký počet "bodů", které mohli investovat do vylepšení své postavy a o vše ostatní se měl postarat systém sám. 
+
+###### Co bylo dál .[toc] 
+
+Sice to chvíli trvalo, ale nakonec se nám to povedlo vytvořit něco použitelného. Až jsme sami byli překvapeni, jak dobře to funguje. Protože se systém vytvářel ještě předtím, než byli napsány pravidla všech jednotek, je výsledek překvapeně univerzální a použitelný pro více věcí, než by nás napadlo.
+
+Pravidla se psali v texťáku ve formátu XML a byla jedna centrální správa na serveru, což nám celkem dost urychlilo práci.
+
+Výsledek nebyl až tak špatný, systém fungoval dobře, někdy bych řekl, že výborně. Problém byl, že se lidi často prostě neuměli dohodnout a tak docházelo k situacím, kdy strany nebyli úplně vyvážené. 
+
+Více o tom, co si o ULRIKovi myslím já můžete dočíst v jednom "starším článku":{$baseUrl}/articles/#toc-co-je-vlastne-ulrik.   
+
+###### A co teď s tím? .[toc]
+
+Bitva před rokem skončila a je teď otázka, co s **ULRIKem** dál. Další **Warhammer** asi jen tak dělat nebudeme (nejsme padlí na hlavu :D), ale zase se nám na to nechce hodit bobek. I když se asi v budoucnu najde projekt, na který by se ULRIK hodil, nebude to hned a je škoda, kdyby to leželo ladem. 
+
+Tak jsme si řekli, že by bylo dobré, zkusit to, co jsme vytvořili komunitě, třeba se něco z toho bude někomu hodit. 
+
+Právě proto se vytvořili tyto stránky, kdy se snažíme ukázat výhody **ULRIKa** a do budoucna třeba se najdě někdo, kdo se této myšlenky chopí a použije ji dále.
+   
+###### Videoukázky .[toc]
+{/block}
+<p class="text-center"><iframe src="http://www.youtube.com/embed/BXH4vkQhQ_w" frameborder="0" height="349" width="560"></iframe></p>
+
+<p>Následující video sloužilo jako takový návod pro hráče na naší bitvě. Chtěli jsme ukázat jak se má případný zájemce za registrovat, jak  upravovat svůj profil a co <b>ULRIK</b> umožňuje velitelům jednotlivých  warband. Přijde řeč i na Wargear, diskuzní skupiny, náš systém Inzerce  atd...</p>
+
+<p class="text-center"><iframe src="http://www.youtube.com/embed/I6mPNZULnFg" frameborder="0" height="349" width="560"></iframe></p>
+
+<p>Toto video je především o tom, jak vypadá část <b>ULRIKa</b>, která se starala o tvorbu pravidel, z pohledu organizátora. </p>
+
+<h2 id="toc-kam-dal" class="toc">Kam dál</h2>
+
+<p>Pokud Vám to zatím neodradilo, můžete se podívat dál na <a href="{$baseUrl}/rules">Pravidla</a>, kde se dozvíte, jak v <b>ULRIKovi</b> vypadali a tvořili se pravidla postav, do <a href="{$baseUrl}/examples">Ukázek</a>, kde je zase o trochu více kódu, na <a href="{$baseUrl}/demo">Demo</a>, abyste si mohli vyzkoušet, jak to všechno funguje, když to funguje, nebo na stránku <a href="{$baseUrl}/downloads">Ke stažení</a>, kde si můžete stáhnout pravidla, příklady a jiné věci.</p>
+
+<p><a href="{$baseUrl}/comics">Komiks</a> je tu spíš pro zasmání a ve <a href="{$baseUrl}/articles">Článcích</a> najdete všechny ostatní texty, co se jinam nevešli.</p>
+
+{/block}

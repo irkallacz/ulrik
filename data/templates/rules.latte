@@ -1,0 +1,318 @@
+{url rules}
+{layout "@layout.latte"}
+
+{block #header}
+<h1>{$mainTitle}</h1>
+<p class="lead">Ten umí to a ten zase tohle</p>
+{/block}
+
+{block #content}
+{block|texy}
+###### O co jde .[toc]
+
+Na naši bitvu jsme museli vytvořit velké množství pravidel. Měli jsme celkem 10 různých národů, v nichž v každém se vyskytovali 3 různé postavy. Složení skupiny bylo 1x velitel (hero), 3x speciální postava (rare) a 6x základní postava (core). Pokud použijte trochu matematiky, dojdete k číslu 30-ti naprosto rozdílných postav. Navíc si vemte, že v pravidlech se vyskytuje dohromady 683 volitelných položek a pravidla jedné postavy mají okolo 8000 znaků a máte přibližnou představu, co vše jsme museli napsat.  
+
+K tomu jsme ještě měli náš unikátní systém, kdy se každý typ postav ještě mohl profilovat, a tak se na bojišti mohli vyskytovat 2 postavy, které sice měli sjtený typ (třeba *Wood Elves Wardancer*), ale ve výsledku mohli mít naprosto rozdílné schopnosti.
+
+Protože práce na pravidlech nám trvala skoro rok a jsem si jistý, že jsme přišli se zajímavými prvky, určitě se najde někdo, komu by se tyhle pravidla mohli hodit.      
+
+###### Co s tím .[toc]
+Celý balík pravidel si můžete stáhnout v jednom archivu na "stránce ke stažení":{$baseUrl}/download#units.
+
+Pravidla jsou uspořádány do složek podle Warband (národa, družin nebo jak tomu chcete říkat). Pravidla každé postavy se skládají ze základního souboru (například `noble.xml`), který obsahuje základní vlastnosti a schopnosti dané postavy a potom ze souboru s koncovkou `*_wargear.xml`, který obsahuje dodatečná schopnosti, kouzla a předměty, které si mohla daná postava zakoupit (viz například `noble_wargear.xml`). 
+
+Soubory jsou ve formátu XML a je použito kódování UTF8. Měli byste je být schopni otevřít v Poznámkovém bloku nebo ve Vašem internetovém prohlížeči.
+
+###### Ukázka pravidel .[toc]
+
+Abyste věději, jak vlastně vypadali naše pravidla, je tu pro Vás připraven takový malý příklad. 
+                    
+##### Noble.xml
+                    
+/---code jush-xml
+<?xml version="1.0" encoding="utf-8"?>
+<jednotka>
+
+<!-- Tento dokument jsou základní pravidla jednotky. Nepište do částí uzavřených mezi < a > 
+ani tyto části neměňte. -->
+
+<!-- Toho je poznámka. Poznámka může být kdekoliv, může v ní být cokoliv, 
+v pravidlech pro hráče se neobjeví a používáme ji pro různé komentáře -->
+
+<jmeno>Noble</jmeno><!-- jedinečné a co nejkratší jméno -->
+
+<hiearchie>hero</hiearchie><!-- přípustné hodnoty jsou hero, rare a core -->      
+
+<legenda>Na zbrojích postav jsou jasně vidět odporné znaky Chaosu. Skrz listí a větve prastarých 
+stromů prosvítají rohaté helmy, zrůdné obličeje a znetvořené těla stoupenců jednoto ze zvrácených 
+bohů Chaosu. Co však vidět není, je hrdá postava, oblečená do barev lesa a maskovacího pláště, 
+schovaná ve stínech velikánů. Upřeně pozoruje postavy kráčející lesní pěšinou směrem k němu. 
+Náhle postava sotva nezřetelně kývne hlavou ... a v tom se strhne peklo. Neznámo odkud se z 
+výšky snese obrovská kláda na provazech a z lesní pěšiny smete poloviny znetvořených postav. 
+Další padají k zemi po zásahu šípy, které začnou vylétat z okolních křovin a stínů. Do všeho toho 
+zmatku a umírání vtrhnou polonahé postavy elfích tanečníků a s každou otočkou, s každým 
+výskokem se jejich meče noří do těl bojovníků Chaosu. A za nedalekým polomem se velitel elfů 
+ponuře usměje. Zase další opovážlivci co se snažili narušit posvátnou půdu lesů Athel Loren ...
+Hlupáci... To nikdy nenastane.  Ne dokud on je na stráži ...</legenda>                    
+<!-- tady je spousta bla bla bla -->
+
+<popis>Vznešení jsou šlechtou mezi lesními elfy. Od narození jsou školeni v boji, strategii a taktice. 
+Avšak jen ti co vykonají rituál Velkého lovu se v případě války stanou vůdci armád a velitelé  malých 
+jednotek. Skvěle znají les ale i boj s obouručním mečem a lukem, jakožto i umění skrytí v lese a 
+taktiku udeř a uteč. Jsou také vyškolen v některých kouzlech a v nepřítomnosti Spellweavra, jemuž ve 
+velení podléhá, vede armádu elfů do bitvy.</popis>                 
+<!-- tady je základní vzhled a chování jednotky pro hráče, co si budou vybírat postavu -->
+
+<pravidla>
+  <lives label="životů">6</lives><!-- počet životů -->
+  <damage label="damage">2</damage><!-- základní zranění --> 
+  <reinkarnace label="min reinkarnace">15</reinkarnace><!-- doba oživení -->
+  <bv label="bodů víry">0</bv><!-- bodů víry --><!-- zcela fiktivní položka --> 
+</pravidla>                  
+<!-- v této části se vyskytují základní statistiky, jako počty životů, délka, reinkarance atd... Můžete si tady 
+vymyslet jakékoliv vlastnosti, které vás napadnou a každá postava je může mít jiné-->
+
+<kostym>
+
+<povinne>Elfí uši, tetování, kostým a plášť v barvách zelené, hnědé atd. (barvy lesa, přírodní 
+vzory), Zbroj.</povinne>
+<!-- Minimální požadavky na postavu, pokud je povinná zbroj stačí napsat jen 
+<b>Zbroj</b>, v další sekci se definuje -->
+
+<extra>doplňky z kůže, kožešiny, runové znaky, kožená helma</extra>               
+<!-- Další části kostýmu náročnější na výrobu. Za jejich přítomnost bude mít dotyčný bonus při 
+nástupu. -->
+
+</kostym>   
+
+<zbroje>
+<!-- Výpis všech zbrojí, co jednotka smí použít -->
+
+  <zbroj>
+    <name>Kožená zbroj</name><desc>kyrys, nátepníky, ramena</desc>
+    <!-- Skoro každá položka má tag <name> Ten musí být v rámci pravidel jedné jednoty unikátní -->
+    <!-- Tag <desc> označuje popis. Uvnitř tohoto tagu můžete používat formátování <b>tučné</b>, 
+    <i>kurzíva</i>, <u>podtržené</u> a <br /> pro nový řádek. -->
+  </zbroj>    
+
+</zbroje>            
+<!-- vypis vseho vybaveni (co není zbroj ani zbran)-->
+
+<zbrane>
+  <!--výpis všech zbraní co bude moct použít -->
+  
+  <zbran><name>Obouruční meč</name><desc>110-140 cm</desc></zbran>                  
+  <zbran><name>Dva meče</name><desc>součet do 150 cm</desc></zbran>       
+</zbrane>                                   
+
+<schopnosti>    
+   <!-- Každá schopnost má jméno, jak často se smí použít a popis -->
+   
+  <skill><name>Pouto lesa</name><attr>trvalé</attr> 
+  <!-- Obvyklé hodnoty <attr> jsou 1x za Souboj, 3x za Fázi (to samé jako minule Quest), trvalé atd 
+-->         
+  <desc>Pokud není řečeno jinak nesmí Noble sesílá své kouzla mimo les. Vesnice se za les 
+  nepovažuje, i když obklopena lesem (stromy tvořící vesnici se nepočítají jako stromy).</desc>
+  </skill>
+  
+</schopnosti>
+
+<kouzla>
+
+  <!-- Před začátkem výpisu musí být napsáno jakým způsobem postava kouzlí -->
+
+  <desc>Zatímco kouzla lidí a Chaosu jsou spojena s vírou, lesní elfové čerpají svoji moc z 
+  lesa, země a života. Pro některá jednoduchá kouzla jim stačí jejich vlastní životní síla, ale 
+  většina kouzel vyžaduje mnohem silnější spojení s lesem. Ve hře to je reprezentováno 
+  dotykem stromu. Hráč se musí rukou dotknout stromu a v této pozici pronášet magickou 
+  formuli. Pokud toho je fyzicky schopen, může v ruce, kterou se dotýká stromu, svírat ještě 
+  jiný předmět, ale jednou rukou se může držet jen jednoho stromu, i kdyby bylo fyzicky 
+  možné dotýkat se více stromů. Pokud při pronášení formule dojde k přerušení spojení, 
+  kouzlo se nepovedlo. Pozor! Stromy tvořící hradby vesnice se nepočítají za herní stromy!</desc>
+  
+  <!-- Každé kouzlo má jméno, co potřebuje na kouzlení, vyvolávací formuli, jak často se smí použít a 
+popis -->
+  
+  <spell>                                                                      
+  <name>Kořeny</name><cost>2 spojeni</cost><attr>1x za Souboj</attr>
+  <form>Iestode vaelach tydar an!</form>
+  <desc>Nohy nepřátelských jednotek se omotají kořeny stromů. Tři jednotky obdrží efekt 
+<i>kořeny</i>.</desc>
+  </spell>
+
+</kouzla>
+
+<!-- bla bla bla ... chování hráče, hrající tuto jednotku -->
+
+<roleplay>Vůdcem šeptajícího kruhu je Spellweaver a Noble je jeho pravá ruka. Na rozdíl od 
+Splétače kouzel je Noble spíše bojového ražení a často bývá viděn v první řadě jak spolu 
+se svými bratry bojuje za les. Spellweaver zodpovídá za celý Kruh, a právě na Noblovy je 
+starat se o vedení lesních elfů a starat se o to, aby rozkazy, které jeho vůdce vydá byly 
+splněny. Za les položí život a když to bude nutné neváhá obětovat i životy jiných. Dříve 
+to býval typický lesní elf: pokud možno neutrální a do boje se nezapojuje. Ale to bylo v 
+době míru. Nyní jsou elfové lační po krvi svých nepřítel a do každého boje ve vrhají 
+neuvěřitelně tvrdě a neznají slitování. Je systematický, důsledný a za každou cenu 
+odhodlaný splnit své poslání a rozkazy které obdrží.</roleplay>                 
+
+<!-- Tady jsou jména obrázků, co se vloží do pravidel. Obrázky dostanete na náš server tak, 
+že je před FTP nahrajete do složky příslušné jednotky -->
+
+<obrazky>
+<img src="wood_elves/noble_5.jpg" />
+<img src="wood_elves/noble_4.jpg" />
+<img src="wood_elves/noble_3.jpg" />
+<img src="wood_elves/noble_1.jpg" />
+</obrazky>
+
+</jednotka>
+\---
+
+##### Noble_wargear.xml
+
+
+/---code jush-xml
+<?xml version="1.0" encoding="utf-8"?> 
+<wargear>
+<!-- Soubor wargearu má pár zvláštností. Předně to je tag <points>, který určuje 
+cenu dané schopnosti, předmětu kouzla atd...  Každá položka musí tento tag mít, 
+ale smí mít hodnotu 0. -->
+
+<!-- Dalším tagem je <cond>, který musí obsahovat jméno schopnosti, kouzla atd... 
+jehož vlastnictvím je podmíněné pořízení této položky. Tag není povinný, 
+ale pokud se vyskytuje, nesmí být prázdný.  -->
+
+<jmeno>Noble</jmeno>
+
+<!-- Povolání jsou jakési základní směry postavy. Samy o sobě můžou a nemusí mít žádný efekt. 
+Slouží především pro základní rozdělení stromu, ale můžou být schopnosti 
+a kouzla přístupná všem směrům.  Hráč si může vybrat i více povolání, pokud na to má body -->
+
+<povolani>
+  <path>
+    <name>Alter kindred</name>
+    <points>50</points>
+    <lives>1</lives> <!-- kterákoliv položka může modifikovat vlasnosti postavy jako jsou životy atd... Pokud bude tato položka 
+    vybrána, automaticky se změna vlastnosti započítá -->
+    <!-- Jako v každém tagu <desc> i ve wargearu funguje v <desc> formátování textu -->
+    <desc>Starší elfové prokazují nezvyklou odolnost a bojové zkušenosti <b>(+1 život)</b>.</desc>
+    <img src="wood_elves/noble_2.jpg" />
+    <!-- položka může klidně přidávat i obrázek-->
+  </path> 
+
+  <path>
+    <name>Glamourewave kindred</name>
+    <points>80</points>
+    <bv>1</bv>
+    <desc>Glamourewave kindred svůj život zasvětili kouzlům.</desc>
+  </path> 
+  
+  <path>
+    <name>Waywatcher kindred</name>
+    <points>100</points>
+    <desc>Waywatcher kindred jsou zběhlí v ukrývání a střelbě.</desc>
+  </path> 
+</povolani>
+
+<zbroje>
+  <zbroj>
+    <name>Tvrzená kožená zbroj</name>
+    <!-- Pokud odkazuji na nějakou položku, musí být její název uveden přesně!-->
+    <points>30</points><cond>Alter kindred</cond> 
+    <desc>Kožená zbroj vyrobená z tlusté kůže Yaků dodává nositel lepší ochranu <b>(+1 životy)</b>.
+    </desc>
+    <lives>1</lives>
+  </zbroj> 
+</zbroje>              
+
+<vybaveni>
+
+ <vybava>
+    <name>Plášť z listů</name>
+    <points>100</points><cond>Skrytí ve stínech</cond>
+<desc>Schopnost <i>Skrytí ve stínu</i> se díky tomuto artefaktu může používat až 8x za Fázi.</desc>
+  </vybava> 
+
+</vybaveni>
+
+<zbrane>
+  <zbran>
+    <name>Kopí</name>
+    <points>50</points>
+    <cond>Alter kindred</cond>
+    <desc>(150-300 cm)</desc>
+  </zbran>                  
+  
+  <zbran>
+    <name>Luk</name>
+    <points>10</points>
+    <cond>Waywatcher kindred</cond>
+    <desc>Maximální nátah 1000 mega tun, šípy dobře měkčené</desc>
+  </zbran>     
+  
+  <zbran>
+    <name>Hůl magie</name>
+    <points>70</points>
+    <cond>Glamourewave kindred</cond>  
+    <desc>Tato mocná hůl je prý součástí samotného Dubu věků. Skrze ní může Noble čerpat  
+    magické proudy lesa, ať již je kdekoliv. Ve hře pak může nahradit jedno <i>Spojení</i> 
+    s lesem tak, že se hráč místo stromu dotýká své hole. Spojení vytvořená tímto předmětem 
+    lze využít pro kouzlení i mimo les</desc>
+  </zbran> 
+</zbrane>                                   
+
+<schopnosti>    
+  <skill>
+    <name>Skrytí ve stínech</name><attr>4x za Fázi</attr>
+    <points>20</points><cond>Waywatcher kindred</cond>
+    <desc>Noble se dokáže schovat v lesních stínech a splynout s nimi. Stačí se chytit 
+    nejbližšího stromu a pronést nahlas se zavřenými oči: <i>"Schovej mě, ukryj mě, ať se jim z očí 
+    ztratím"</i>. Poté je na něj uplatněn efekt základní neviditelnost. Pokud se dostane z území lesa, 
+    efekt mizí.</desc>
+  </skill> 
+  
+  <skill>
+    <name>Regenerace</name><attr>4x za Fázi</attr>
+    <points>30</points> <!-- Tahle schopnost nemá podmínku, koupit si jí můžete už od začátku -->
+    <desc>Když se Noble chytí kmene stromu, zavře oči a plynule a nahlas pronese slova: <i>"Já 
+    zranění již svá nechci a novou sílu načerpám"</i> (musí to říct aspoň 3 krát), může si poté  
+    přičíst 4 životy</desc>
+    <lives>1</lives>
+  </skill>
+  
+  <skill>
+    <name>Požehnání lesa</name><attr>2x za Fázi</attr>
+    <points>30</points><cond>Regenerace</cond>
+    <desc>Součástí učení šlechty lesních elfů je umění naslouchat a mluvit s Lesem. V případě 
+    nebezpečí může Noble vyslat jakousi modlitbu k lesu a ten pokud ho vyslyší, poskytne 
+    mu část své síly skrze duše lesa, které do něj vstoupí. Hráč musí pokleknout na zem, 
+    dotýkat se země a začít se modlit. Volba modlitby je něm. Po jejím skončení si může 
+    přidat 3 stínové životy. Může být provedeno pouze v lese.</desc>
+  </skill>  
+</schopnosti>
+
+<kouzla>                                                      
+  <spell>
+    <name>Ledová dýka</name><cost>1 spojeni</cost><attr>2x za Souboj</attr>
+    <points>50</points><cond>Glamourewave kindred</cond>
+    <form>Aesta alach ses!</form>
+    <desc>Z ruky Nobla vytryskne nehmotný blesk, který dokáže připravit nepřátele o jejich 
+    sílu. Vybraná nepřátelská jednotka obdrží efekt paralýza na 30 vteřin.</desc> 
+  </spell>
+</kouzla> 
+
+</wargear>
+\---
+
+Tyto příklady si můžete stáhnout na "stránce ke stažení":{$baseUrl}/download#noble.
+
+V pravidlech můžete narazit na výrazy, které se mohou vztahovat k obecným pravidlům naší bitvy. Ty si můžete stáhnout na "stránce ke stažení":{$baseUrl}/download#rules.
+
+###### Až dojde na nejhorší .[toc]
+Pokud Vám pravidla pomohou a budete je chtít použít na nějaké své akci, dejte nám prosím vědět na adresu faila@atlas.cz. Rád také zodpovím případné dotazy. 
+{/block}                      
+<script type="text/javascript" src="{$baseUrl}/js/jush.js"></script>
+<script type="text/javascript">
+  jush.style('./css/jush.css');
+  jush.highlight_tag('pre');
+</script>
+{/block}
