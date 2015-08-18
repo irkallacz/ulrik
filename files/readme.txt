@@ -8,9 +8,9 @@ Ukázková pravidla postavy se nacházejí ve složce units a jsou také komento
 
 Ve složkách img a css můžete najít kaskádové styly a obrázky, které jsou použity v jednotlivých příkladech. 
 
-Pokud byste chtěli systém vykoušet na komplexnějších pravidlech, která byli použity na naší bitvě, můžete si tyto pravidla jednotných postav stáhnout na adrese http://ulrik.irkalla.cz/file/units.zip. Stačí je rozbalit a nakopírovat do složky units. 
+Pokud byste chtěli systém vykoušet na komplexnějších pravidlech, která byli použity na naší bitvě, můžete si tyto pravidla jednotných postav stáhnout na adrese http://ulrik.irkalla.cz/files/units.zip. Stačí je rozbalit a nakopírovat do složky units. 
 
-V pravidlech můžete narazit na výrazy, které se mohou vztahovat k obecným pravidlům naší bitvy. Tyto pravidla si můžete stáhnout na adrese http://ulrik.irkalla.cz/file/pravidla.pdf.
+V pravidlech můžete narazit na výrazy, které se mohou vztahovat k obecným pravidlům naší bitvy. Tyto pravidla si můžete stáhnout na adrese http://ulrik.irkalla.cz/files/pravidla.pdf.
 
 Pokud byste chtěli tento projekt využít na nějaké své akci, máte k tomu můj souhlas, pokud nebudete nehorázně kopírovat naší práci a vydávat jí za svoji vlastní. Proto bych doporučil změnit vizuální podobu stránek, pravidel, udělat si vlastí logo atd... Zároveň by bylo fér se zmínit se na nových webovkách o tom, čí práci využíváte.  
 
